@@ -17,6 +17,8 @@ class Weather < Sinatra::Base
 
   helpers Sinatra::StandardAPI
 
+  set :public_folder, 'static'
+
   get '/' do
       erb :index
   end
