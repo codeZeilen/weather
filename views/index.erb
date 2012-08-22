@@ -13,16 +13,14 @@
 
             postElement.append(nameElement).append(contentElement).append(sympathiesElement);
 
-            $("#"+realm).prepend(postElement);
+            $("#"+realm+"> .content").prepend(postElement);
         };
 
         function addPosts(posts) {
-            
             $.each(posts, function(index, post) {
                 var realm = post.good ? "sunny" : "cloudy"; 
                 addPost(post, realm);
             });
-
         };
 
         function processPostsResponse(json) {
@@ -49,11 +47,19 @@
 
     <body>
         <div id="cloudy">
-
+            <div class="new-post">
+                <input class="post" type="text" />
+            </div>
+            <div class="content">
+            </div>
         </div>
 
         <div id="sunny">
-
+            <div class="new-post">
+                <input class="post" type="text" />
+            </div>
+            <div class="content">
+            </div>
         </div>
     </body>
 
