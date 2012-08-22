@@ -18,9 +18,18 @@ class Weather < Sinatra::Base
   helpers Sinatra::StandardAPI
 
   get '/' do
-      "Welcome!"
+      erb :index
   end
 
+  get '/posts' do
+    @posts = Post.find(:all, :limit => 25)
+    render :rabl, :posts, :format => "json"
+  end
+
+  get '/new_posts/:from_id' do
+    @posts = Post.where("id > ?", params[:from_id])
+    render :rabl, :posts, :format => "json"
+  end
 
   #start the server if file is executed directly
   run! if app_file == $0
