@@ -54,12 +54,28 @@ div.content {
 }
 
 div.new-post, div.content {
-    background-color: #transparent;
+    background-clip: padding-box;
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 6px;
-    -moz-border-radius: 6px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 0;
+}
+
+div.new-post *, div.content * {
+    background-color: #fff;
+}
+
+div.new-post > :first-child, div.content > :first-child {
+    padding-top: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 0px;
+}
+
+div.new-post > :last-child, div.content > :last-child {
+    padding-bottom: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 0px;
 }
 
 div.main-content {
@@ -71,12 +87,11 @@ div.main-content {
 
 div.post {
     background-color: #fff;
-    width: 95%;
+    padding: 0 10px;
 }
 
 div.post, div.new-post-input-elements {
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0 auto;
 }
 
 ul.controls {
@@ -99,5 +114,5 @@ textarea.new-post-input {
 }
 
 div.new-post-input-elements {
-    width: 95%;
-};
+    padding: 0 10px;
+}
