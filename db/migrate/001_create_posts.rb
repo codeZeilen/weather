@@ -5,7 +5,6 @@ class CreatePosts < ActiveRecord::Migration
       t.string    "name"
       t.integer   "poster_id"
       t.boolean   "good"
-      t.text      "enc_content"
     end
   end
 
