@@ -1,7 +1,8 @@
 <html>
     <head>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <link type="text/css" rel="reset.css" />
+        <link rel="stylesheet" href="reset.css" />
+        <link rel="stylesheet" href="design/css/main.css" />
         <script type="text/javascript">
         <!--
         function addPost(post, realm) {
@@ -40,12 +41,58 @@
         -->
         </script>
         <style type="text/css">
+            .bg {
+                clear:both;
+            }
+
+            div.bg_head {
+                z-index: 0;
+            }
+
             #sunny {
-                background-color: #FFFFFF;
+                float: right;
+                right: 20%;
             }
 
             #cloudy {
-                background-color: #FFF;
+                float: left;
+                left: 20%;
+            }
+
+            #sunny, #cloudy {
+                width: 45%;
+            }
+
+
+            .content {
+                margin-top: 10px;
+            }
+
+            .new-post, .content {
+                background-color: #F5F5E4;
+                border: 1px solid #B8B8B8;
+                border-radius: 6px;
+                -moz-border-radius: 6px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+
+            .main-content {
+                margin-left: auto;
+                margin-right: auto;
+                width: 1050px;
+                vertical-align: top;
+                z-index: 1;
+            }
+
+            .post {
+                background-color: #fff;
+                width: 95%;
+            }
+
+            .post, .new-post-input-elements {
+                margin-left: auto;
+                margin-right: auto;
             }
 
             ul.controls {
@@ -60,41 +107,52 @@
                 color: #FFFFFF;
                 text-decoration: none;
             }
-
-            .new-post {
-                border: 1px solid #000000;
-                width: 350px;
-                background-color: #CCCCCC;
-            }
             
             .new-post-input {
-                width: 350px;
+                width: 100%;
                 margin-bottom: 0px;
                 margin-top: 0px;
             }
+
+            .new-post-input-elements {
+                width: 95%;
+            };
         </style>
     </head>
 
     <body>
-        <div id="cloudy">
-            <div class="new-post">
-                <textarea class="new-post-input" rows="1"></textarea>
-                <ul class="controls">
-                    <li><a href="#" class="submit">Submit</a></li>
-                </ul>
+        <div class="bg">
+            <div class="bg_head">
             </div>
-            <div class="content">
-            </div>
-        </div>
 
-        <div id="sunny">
-            <div class="new-post">
-                <textarea class="new-post-input" rows="1"></textarea>
-                <ul class="controls">
-                    <li><a href="#" class="submit">Submit</a></li>
-                </ul>
-            </div>
-            <div class="content">
+            <div class="main-content">
+
+                <div id="cloudy">
+                    <div class="new-post">
+                        <div class="new-post-input-elements">
+                            <textarea class="new-post-input" rows="1"></textarea>
+                            <ul class="controls">
+                                <li><a href="#" class="submit">Submit</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                    </div>
+                </div>
+
+                <div id="sunny">
+                    <div class="new-post">
+                        <div class="new-post-input-elements">
+                            <textarea class="new-post-input" rows="1"></textarea>
+                            <ul class="controls">
+                                <li><a href="#" class="submit">Submit</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                    </div>
+                </div>
+
             </div>
         </div>
     </body>
