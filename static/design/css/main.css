@@ -23,12 +23,81 @@ div.bg {
     right: 0;
     width: 100%;
     height: 100%;
+
+    background-position: top center;
+    background-image: url('../img/bg_head.png');
+    background-repeat: no-repeat;
+    z-index: -100;
 }
 
-div.bg_head {
-    background-image: url('../img/bg_head.png');
-    background-repeat: none;
-    width: 1200px;
-    height: 379px;
-    margin: 0 auto;
+div.break {
+    clear: both;
 }
+
+div#sunny {
+    float: right;
+    right: 20%;
+}
+
+div#cloudy {
+    float: left;
+    left: 20%;
+}
+
+div#sunny, div#cloudy {
+    width: 45%;
+}
+
+
+div.content {
+    margin-top: 10px;
+}
+
+div.new-post, div.content {
+    background-color: #transparent;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.main-content {
+    margin: 0 auto;
+    width: 1050px;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+div.post {
+    background-color: #fff;
+    width: 95%;
+}
+
+div.post, div.new-post-input-elements {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul.controls {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+}
+
+ul.controls a {
+    background-color: #0000CC;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+textarea.new-post-input {
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+div.new-post-input-elements {
+    width: 95%;
+};

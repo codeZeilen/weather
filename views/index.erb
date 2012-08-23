@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>The next big twitter thing</title>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <link rel="stylesheet" href="design/css/main.css" />
         <script type="text/javascript">
@@ -12,7 +13,7 @@
             var contentElement = $('<div>').attr("class", "post-content").text(post.content);
             var sympathiesElement = $('<div>').attr("class", "post-sympathies").text(post.sympathies.length);
 
-            postElement.append(nameElement).append(contentElement).append(sympathiesElement);
+            postElement.append(contentElement).append(nameElement).append(sympathiesElement);
 
             $("#"+realm+"> .content").prepend(postElement);
         };
@@ -39,120 +40,38 @@
 
         -->
         </script>
-        <style type="text/css">
-            .bg {
-                clear:both;
-            }
-
-            div.bg_head {
-                z-index: 0;
-            }
-
-            #sunny {
-                float: right;
-                right: 20%;
-            }
-
-            #cloudy {
-                float: left;
-                left: 20%;
-            }
-
-            #sunny, #cloudy {
-                width: 45%;
-            }
-
-
-            .content {
-                margin-top: 10px;
-            }
-
-            .new-post, .content {
-                background-color: #F5F5E4;
-                border: 1px solid #B8B8B8;
-                border-radius: 6px;
-                -moz-border-radius: 6px;
-                padding-top: 5px;
-                padding-bottom: 5px;
-            }
-
-            .main-content {
-                margin-left: auto;
-                margin-right: auto;
-                width: 1050px;
-                vertical-align: top;
-                z-index: 1;
-            }
-
-            .post {
-                background-color: #fff;
-                width: 95%;
-            }
-
-            .post, .new-post-input-elements {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            ul.controls {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                text-align: right;
-            }
-
-            ul.controls a {
-                background-color: #0000CC;
-                color: #FFFFFF;
-                text-decoration: none;
-            }
-            
-            .new-post-input {
-                width: 100%;
-                margin-bottom: 0px;
-                margin-top: 0px;
-            }
-
-            .new-post-input-elements {
-                width: 95%;
-            };
-        </style>
     </head>
 
     <body>
         <div class="bg">
-            <div class="bg_head">
-            </div>
-
-            <div class="main-content">
-
-                <div id="cloudy">
-                    <div class="new-post">
-                        <div class="new-post-input-elements">
-                            <textarea class="new-post-input" rows="1"></textarea>
-                            <ul class="controls">
-                                <li><a href="#" class="submit">Submit</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="content">
+        </div>
+        <div class="main-content">
+            <div id="cloudy">
+                <div class="new-post">
+                    <div class="new-post-input-elements">
+                        <textarea class="new-post-input" rows="1"></textarea>
+                        <ul class="controls">
+                            <li><a href="#" class="submit">Submit</a></li>
+                        </ul>
                     </div>
                 </div>
+                <div class="content">
+                </div>
+            </div>
 
-                <div id="sunny">
-                    <div class="new-post">
-                        <div class="new-post-input-elements">
-                            <textarea class="new-post-input" rows="1"></textarea>
-                            <ul class="controls">
-                                <li><a href="#" class="submit">Submit</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="content">
+            <div id="sunny">
+                <div class="new-post">
+                    <div class="new-post-input-elements">
+                        <textarea class="new-post-input" rows="1"></textarea>
+                        <ul class="controls">
+                            <li><a href="#" class="submit">Submit</a></li>
+                        </ul>
                     </div>
                 </div>
-
+                <div class="content">
+                </div>
             </div>
+            <div class="break"></div>
         </div>
     </body>
 
