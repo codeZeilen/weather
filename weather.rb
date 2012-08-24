@@ -44,7 +44,8 @@ class Weather < Sinatra::Base
         p.poster = poster
     end
     p.save
-    return 200
+    @post = p
+    render :rabl, :post, :format => "json"
   end
 
   #start the server if file is executed directly
