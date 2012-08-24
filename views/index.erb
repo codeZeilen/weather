@@ -33,8 +33,25 @@
             addPosts(posts);
         };
 
-        $(function() {
+        function postPost(realm) {
+            var realmSelector = "#" + realm + " ";
+            var post = {
+                good : realm == "sunny",
+                content : $(realmSelector + ".new-post-input-content").val(),
+                name : $(realmSelector + ".new-post-input-name").val(),
+                email : $(realmSelector + ".new-post-input-name").val()
+            };
+            
+            $.post("posts", JSON.stringify(post), postStored);
+        };
 
+        function postStored(data) {
+            var post = JSON.parse(data); 
+            var realm = post.good ? "sunny" : "cloudy"; 
+            addPost(post, realm);
+        };
+
+        $(function() {
             $("#cloudy .new-post-input-content").focus(function() {
                 $(this).attr("rows", 5);
                 $("#cloudy .new-post-input-elements .additional-inputs").attr("style", "display: block;");
@@ -50,6 +67,14 @@
             $('.new-post-input-name').Watermark("Your Name");
             $('.new-post-input-email').Watermark("Your EMail");
 
+            $('#cloudy a.new-post-input-submit').click(function() {
+                postPost("cloudy");
+                return false;
+            });
+            $('#sunny a.new-post-input-submit').click(function() {
+                postPost("sunny");
+                return false;
+            });
 
             setInterval(function() {
                 cloudyId = JSON.parse($('#cloudy .post').first().attr("id"));
