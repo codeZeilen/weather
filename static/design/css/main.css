@@ -7,6 +7,7 @@ html, body {
 body {
     margin: 0;
     padding: 0;
+    padding-bottom: 20px;
     font-family: Arial;
     font-size: 10pt;
     color: #333;
@@ -53,15 +54,21 @@ div.content {
     margin-top: 10px;
 }
 
+div.new-post *, div.content * {
+    background-color: #fff;
+}
+
+/**
+ *
+ * Round Boxes with nice borders
+ *
+ */
+
 div.new-post, div.content {
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 6px;
     padding: 0;
-}
-
-div.new-post *, div.content * {
-    background-color: #fff;
 }
 
 div.new-post > :first-child, div.content > :first-child {
@@ -77,6 +84,40 @@ div.new-post > :last-child, div.content > :last-child {
     border-bottom-right-radius: 5px;
     border: 0px;
 }
+
+/**
+ *
+ * Posts
+ * 
+ */
+
+div.post {
+    border-bottom: 1px solid #DDD !important;
+    padding: 1em !important;
+}
+
+div.post-content {
+    margin-bottom: 0.25em;
+}
+
+ul.post-details {
+    list-style:none;
+    padding:0;
+    margin:0;
+    text-align: right;
+}
+
+ul.post-details li {
+   list-style:none; 
+   display:inline;
+   margin-right: 5px;
+}
+
+/**
+ *
+ * Post Input
+ *
+ */
 
 div.main-content {
     margin: 0 auto;
@@ -131,3 +172,4 @@ a.new-post-input-submit {
     position:relative;
     top:1px;
 }
+

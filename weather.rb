@@ -25,7 +25,7 @@ class Weather < Sinatra::Base
   end
 
   get '/posts' do
-    @posts = Post.find(:all, :limit => 25)
+    @posts = Post.find(:all, :order => "id DESC", :limit => 50).reverse
     render :rabl, :posts, :format => "json"
   end
 
@@ -37,14 +37,14 @@ class Weather < Sinatra::Base
   post '/posts' do
     request.body.rewind
     data = JSON.parse request.body.read
-    p = Post.new(:content => data["content"], :good => data["good"], :name => data["name"])
+    post = Post.new(:content => data["content"], :good => data["good"], :name => data["name"])
     if(data["email"])
         mail = data["email"]
         poster = Poster.find_by_email(mail) || Poster.create(:email => mail) 
-        p.poster = poster
+        post.poster = poster
     end
-    p.save
-    @post = p
+    post.save
+    @post = post
     render :rabl, :post, :format => "json"
   end
 

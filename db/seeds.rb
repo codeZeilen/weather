@@ -1,4 +1,5 @@
 require './model/post'
+require './model/poster'
 require './model/sympathy'
 
 require 'active_record'
@@ -36,4 +37,9 @@ p = Post.new
 p.name = "Another awsome post"
 p.content = "This is a funny thing as it works"
 p.good = false
+p.save
+
+po = Poster.new(:email => "patrick@me.de")
+po.save
+p.poster = po
 p.save
