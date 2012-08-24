@@ -52,16 +52,10 @@
         };
 
         $(function() {
-            $("#cloudy").focusin(function() {
-                expandNewPost('cloudy');
+            $(".new-post").focusin(function() {
+                expandNewPost($(this));
             }).focusoutside(function () {
-                collapseNewPost('cloudy');
-            });
-
-            $("#sunny").focusin(function() {
-                expandNewPost('sunny');
-            }).focusoutside(function () {
-                collapseNewPost('sunny');
+                collapseNewPost($(this));
             });
 
             $('#cloudy .new-post-input-content').Watermark("What *** thing happened to you?");
@@ -87,28 +81,46 @@
             $.get("posts", processPostsResponse);
         });
 
-        function expandNewPost(moodId) {
-            var moodBox = $('#' + moodId);
-            moodBox.find('.new-post-input-content').attr("rows", 5);
-            moodBox.find('.new-post-input-elements .additional-inputs').css("display", "block");
+        function expandNewPost(newPostElement) {
+            newPostElement.find('.new-post-input-content').attr("rows", 5);
+            newPostElement.find('.new-post-input-elements .additional-inputs').css("display", "block");
         }
 
-        function collapseNewPost(moodId) {
-            var moodBox = $('#' + moodId);
-            moodBox.find('.new-post-input-content').attr("rows", 1);
-            moodBox.find('.new-post-input-elements .additional-inputs').css("display", "none");
+        function collapseNewPost(newPostElement) {
+            newPostElement.find('.new-post-input-content').attr("rows", 1);
+            newPostElement.find('.new-post-input-elements .additional-inputs').css("display", "none");
         }
 
         jQuery.fn.focusoutside = function() {
-            var o = $(this[0]);
             var callback = arguments[0];
-            o.focusout(function(evt) {
-                setTimeout(function () {
-                    evt.relatedTarget = document.activeElement;
-                    if (o.find(evt.relatedTarget).length < 1) {
-                        callback(evt);
+            $(this).each(function(){
+                var o = $(this);
+                var proxiedCallback = $.proxy(callback, this);
+
+                var mouseOver = false;
+                o.mouseenter(function() {
+                    mouseOver = true;
+                });
+                o.mouseleave(function() {
+                    mouseOver = false;
+                    if (o.find(document.activeElement).length < 1) {
+                        $(document).click(function(evt) {
+                            if (!mouseOver) {
+                                proxiedCallback(evt);
+                            }
+                            $(this).unbind('click', arguments.callee);
+                        });
                     }
-                }, 1);
+                })
+
+                o.focusout(function(evt) {
+                    setTimeout(function () {
+                        evt.relatedTarget = document.activeElement;
+                        if (o.find(evt.relatedTarget).length < 1 && !mouseOver) {
+                            proxiedCallback(evt);
+                        }
+                    }, 1);
+                });
             });
         };
 
