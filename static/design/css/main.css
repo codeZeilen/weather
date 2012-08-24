@@ -94,23 +94,20 @@ div.post, div.new-post-input-elements {
     padding: 0 auto;
 }
 
-ul.controls {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: right;
-}
-
-ul.controls a {
+div.new-post-input-elements a {
     background-color: #0000CC;
     color: #FFFFFF;
     text-decoration: none;
 }
 
-textarea.new-post-input {
+.new-post-input-elements input, .new-post-input-elements textarea {
+    margin: 0 auto;
+    border: 1px solid #CCC;
+}
+
+textarea.new-post-input-content {
     width: 100%;
-    margin-bottom: 0px;
-    margin-top: 0px;
+    margin-bottom: 3px;
 }
 
 div.new-post-input-elements {

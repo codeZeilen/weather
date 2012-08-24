@@ -1,7 +1,8 @@
 <html>
     <head>
         <title>The next big twitter thing</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script src="jquery.js"></script>
+        <script src="jquery.watermarkinput.js"></script>
         <link rel="stylesheet" href="design/css/main.css" />
         <script type="text/javascript">
         <!--
@@ -13,7 +14,9 @@
             var contentElement = $('<div>').attr("class", "post-content").text(post.content);
             var sympathiesElement = $('<div>').attr("class", "post-sympathies").text(post.sympathies.length);
 
-            postElement.append(contentElement).append(nameElement).append(sympathiesElement);
+            var detailElement = $('<div>').attr("class", "post-details");
+            detailElement.append(nameElement).append(sympathiesElement);
+            postElement.append(contentElement).append(detailElement);
 
             $("#"+realm+"> .content").prepend(postElement);
         };
@@ -31,10 +34,29 @@
         };
 
         $(function() {
-            $(".new-post-input").click(function() {
+
+            $("#cloudy .new-post-input-content").focus(function() {
                 $(this).attr("rows", 5);
+                $("#cloudy .new-post-input-elements .additional-inputs").attr("style", "display: block;");
             });
 
+            $("#sunny .new-post-input-content").focus(function() {
+                $(this).attr("rows", 5);
+                $("#sunny .new-post-input-elements .additional-inputs").attr("style", "display: block;");
+            });
+
+            $('#cloudy .new-post-input-content').Watermark("What *** thing happened to you?");
+            $('#sunny .new-post-input-content').Watermark("What *** thing happened to you?");
+            $('.new-post-input-name').Watermark("Your Name");
+            $('.new-post-input-email').Watermark("Your EMail");
+
+
+            setInterval(function() {
+                cloudyId = JSON.parse($('#cloudy .post').first().attr("id"));
+                sunnyId = JSON.parse($('#sunny .post').first().attr("id"));
+                id = cloudyId > sunnyId ? cloudyId : sunnyId;
+                $.get("new_posts/" + id, processPostsResponse);
+            }, 15000);
             $.get("posts", processPostsResponse);
         });
 
@@ -49,10 +71,12 @@
             <div id="cloudy">
                 <div class="new-post">
                     <div class="new-post-input-elements">
-                        <textarea class="new-post-input" rows="1"></textarea>
-                        <ul class="controls">
-                            <li><a href="#" class="submit">Submit</a></li>
-                        </ul>
+                        <textarea name="content" class="new-post-input-content" rows="1"></textarea>
+                        <div class="additional-inputs" style="display:none;" >
+                            <input name="name" class="new-post-input-name" type="text" />
+                            <input name="email" class="new-post-input-email" type="text" />
+                            <a href="#" class="submit">Submit</a>
+                        </div>
                     </div>
                 </div>
                 <div class="content">
@@ -62,10 +86,12 @@
             <div id="sunny">
                 <div class="new-post">
                     <div class="new-post-input-elements">
-                        <textarea class="new-post-input" rows="1"></textarea>
-                        <ul class="controls">
-                            <li><a href="#" class="submit">Submit</a></li>
-                        </ul>
+                        <textarea name="content" class="new-post-input-content" rows="1"></textarea>
+                        <div class="additional-inputs" style="display: none;" >
+                            <input name="name" class="new-post-input-name" type="text" />
+                            <input name="email" class="new-post-input-email" type="text" />
+                            <a href="#" class="submit">Submit</a>
+                        </div>
                     </div>
                 </div>
                 <div class="content">
