@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table "posts" do |t|
       t.text      "content"
       t.string    "name"
-      t.integer   "poster_id"
+      t.references :poster
       t.boolean   "good"
     end
   end

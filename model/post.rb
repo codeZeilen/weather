@@ -6,4 +6,6 @@ class Post < ActiveRecord::Base
 
     has_many :sympathies
 
+    attr_accessible :id, :name, :content, :good, :poster_id, :poster
+
 end

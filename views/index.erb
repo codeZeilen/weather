@@ -8,15 +8,16 @@
         <!--
         function addPost(post, realm) {
 
-            var postElement = $('<div>').attr("id", post.id).attr("class", "post");
-
-            var nameElement = $('<div>').attr("class", "post-name").text(post.name);
             var contentElement = $('<div>').attr("class", "post-content").text(post.content);
-            var sympathiesElement = $('<div>').attr("class", "post-sympathies").text(post.sympathies.length);
 
-            var detailElement = $('<div>').attr("class", "post-details");
-            detailElement.append(nameElement).append(sympathiesElement);
-            postElement.append(contentElement).append(detailElement);
+            var detailsList = $('<ul>').attr("class", "post-details");
+            var nameElement = $('<li>').attr("class", "post-name").text(post.name ? "by " + post.name : "by anonymous");
+            var sympathiesText = realm == "cloudy" ? "Hells!" : "Yeahs!";
+            var sympathiesElement = $('<li>').attr("class", "post-sympathies").text(post.sympathies.length + " " + sympathiesText);
+            detailsList.append(nameElement).append(sympathiesElement);
+
+            var postElement = $('<div>').attr("id", post.id).attr("class", "post");
+            postElement.append(contentElement).append(detailsList);
 
             $("#"+realm+"> .content").prepend(postElement);
         };
@@ -35,18 +36,22 @@
 
         function postPost(realm) {
             var realmSelector = "#" + realm + " ";
+            var name = $(realmSelector + ".new-post-input-name").val();
+            name = (name == "Your Name (optional)" ? "" : name);
+            var email = $(realmSelector + ".new-post-input-email").val();
+            email = (email == "Your EMail (optional)" ? undefined : email);
             var post = {
                 good : realm == "sunny",
                 content : $(realmSelector + ".new-post-input-content").val(),
-                name : $(realmSelector + ".new-post-input-name").val(),
-                email : $(realmSelector + ".new-post-input-name").val()
+                name : name,
+                email : email
             };
             
             $.post("posts", JSON.stringify(post), postStored);
         };
 
         function postStored(data) {
-            var post = JSON.parse(data); 
+            var post = JSON.parse(data).post; 
             var realm = post.good ? "sunny" : "cloudy"; 
             addPost(post, realm);
         };
@@ -58,10 +63,10 @@
                 collapseNewPost($(this));
             });
 
-            $('#cloudy .new-post-input-content').Watermark("What *** thing happened to you?");
-            $('#sunny .new-post-input-content').Watermark("What *** thing happened to you?");
-            $('.new-post-input-name').Watermark("Your Name");
-            $('.new-post-input-email').Watermark("Your EMail");
+            $('#cloudy .new-post-input-content').Watermark("What the hell?");
+            $('#sunny .new-post-input-content').Watermark("What's yeah?");
+            $('.new-post-input-name').Watermark("Your Name (optional)");
+            $('.new-post-input-email').Watermark("Your EMail (optional)");
 
             $('#cloudy a.new-post-input-submit').click(function() {
                 postPost("cloudy");
