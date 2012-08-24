@@ -57,14 +57,16 @@
         };
 
         $(function() {
-            $("#cloudy .new-post-input-content").focus(function() {
-                $(this).attr("rows", 5);
-                $("#cloudy .new-post-input-elements .additional-inputs").attr("style", "display: block;");
+            $("#cloudy").focusin(function() {
+                expandNewPost('cloudy');
+            }).focusoutside(function () {
+                collapseNewPost('cloudy');
             });
 
-            $("#sunny .new-post-input-content").focus(function() {
-                $(this).attr("rows", 5);
-                $("#sunny .new-post-input-elements .additional-inputs").attr("style", "display: block;");
+            $("#sunny").focusin(function() {
+                expandNewPost('sunny');
+            }).focusoutside(function () {
+                collapseNewPost('sunny');
             });
 
             $('#cloudy .new-post-input-content').Watermark("What the hell?");
@@ -89,6 +91,31 @@
             }, 15000);
             $.get("posts", processPostsResponse);
         });
+
+        function expandNewPost(moodId) {
+            var moodBox = $('#' + moodId);
+            moodBox.find('.new-post-input-content').attr("rows", 5);
+            moodBox.find('.new-post-input-elements .additional-inputs').css("display", "block");
+        }
+
+        function collapseNewPost(moodId) {
+            var moodBox = $('#' + moodId);
+            moodBox.find('.new-post-input-content').attr("rows", 1);
+            moodBox.find('.new-post-input-elements .additional-inputs').css("display", "none");
+        }
+
+        jQuery.fn.focusoutside = function() {
+            var o = $(this[0]);
+            var callback = arguments[0];
+            o.focusout(function(evt) {
+                setTimeout(function () {
+                    evt.relatedTarget = document.activeElement;
+                    if (o.find(evt.relatedTarget).length < 1) {
+                        callback(evt);
+                    }
+                }, 1);
+            });
+        };
 
         -->
         </script>
